@@ -1,5 +1,14 @@
 # LazyCommander - Development Log
 
+## 2024-03-04 - UI Polish
+
+### Completed
+- Header with "LazyCommander v0.1.0" centered
+- Removed window title bar text
+- Panels with borders (no dividers)
+- Dark blue background (#252538) in commands list
+- Taller list items with hover/focus styling
+
 ## 2024-03-03 - v2 UI Redesign
 
 ### Completed

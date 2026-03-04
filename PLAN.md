@@ -1,15 +1,15 @@
 # LazyCommander - Task Plan
 
-## UI Redesign (v2)
+## UI Redesign (v2) - Testing
 
-- [ ] 1. Refactor layout: Vertical split (2 rows, then columns in row 1)
-- [ ] 2. Create inline form widget (replaces list when editing/creating)
-- [ ] 3. Create terminal output widget (row 2)
-- [ ] 4. Implement mode switching (list ↔ form)
-- [ ] 5. Add inline delete confirmation
-- [ ] 6. Real-time preview in details panel
-- [ ] 7. Test navigation (↑↓ inputs, ←→ buttons)
-- [ ] 8. Test all functionality
+- [x] 1. Refactor layout: Vertical split (2 rows, then columns in row 1)
+- [x] 2. Create inline form widget (replaces list when editing/creating)
+- [x] 3. Create terminal output widget (row 2)
+- [x] 4. Implement mode switching (list ↔ form)
+- [x] 5. Add inline delete confirmation
+- [x] 6. Real-time preview in details panel
+- [x] 7. Test navigation (↑↓ inputs, ←→ buttons)
+- [x] 8. Test all functionality
 
 ## Previous Phases (Completed)
 

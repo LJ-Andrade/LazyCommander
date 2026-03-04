@@ -8,7 +8,7 @@ from textual.widgets import Button, Input, Static
 
 from src.models.command import Command
 from src.storage.json_store import JsonStore
-from src.ui.theme import THEME, ASCII_LOGO
+from src.ui.theme import THEME
 from src.ui.widgets import CommandListItem, CommandListView, DetailsPanel
 
 
@@ -16,29 +16,33 @@ class LazyCommanderApp(App):
     CSS = """
     Screen {
         background: $background;
-        overflow: hidden;
     }
     
     #main-container {
+        height: 100%;
+        padding: 1;
     }
     
-    #header-row {
-        height: auto;
-        padding: 0 1;
+    #header {
+        height: 2;
+        dock: top;
+        content-align: center middle;
         background: $surface;
         color: $primary;
-        border-bottom: solid $secondary;
+        text-style: bold;
     }
     
     #top-row {
+        height: 55%;
     }
     
     #bottom-row {
+        height: auto;
     }
     
     #footer {
         dock: bottom;
-        height: auto;
+        height: 1;
         padding: 0 1;
         background: $surface;
         color: $text-muted;
@@ -46,30 +50,40 @@ class LazyCommanderApp(App):
     
     #left-panel {
         width: 40%;
+        border: solid $secondary;
+        margin: 0 1 0 0;
+        background: #252538;
     }
     
     #right-panel {
         width: 60%;
+        border: solid $secondary;
+        margin: 0 0 0 1;
     }
     
     #command-list {
         height: 100%;
-        border: solid $secondary;
-        overflow-y: auto;
     }
     
     #details {
         padding: 2;
-        border: solid $secondary;
     }
     
     #output {
-        height: 100%;
         padding: 1;
         background: #11111b;
         color: #cdd6f4;
         border: solid $secondary;
-        overflow-y: auto;
+        margin: 1;
+        min-height: 5;
+    }
+    
+    #footer {
+        dock: bottom;
+        height: 1;
+        padding: 0 1;
+        background: $surface;
+        color: $text-muted;
     }
     
     .panel {
@@ -81,11 +95,15 @@ class LazyCommanderApp(App):
     }
     
     ListView > ListItem {
-        padding: 0 1;
+        padding: 1 1;
     }
     
     ListView > ListItem:hover {
-        background: $surface;
+        background: $secondary;
+    }
+    
+    ListView > ListItem:focus {
+        background: $primary;
     }
     
     #form-container {
@@ -152,8 +170,8 @@ class LazyCommanderApp(App):
         self.output_lines: list[str] = []
 
     def compose(self) -> ComposeResult:
-        yield Static(ASCII_LOGO, id="header-row")
         with Vertical(id="main-container"):
+            yield Static("LazyCommander v0.1.0", id="header")
             with Horizontal(id="top-row", classes="panel"):
                 with Vertical(id="left-panel", classes="panel"):
                     yield CommandListView(id="command-list")
@@ -163,10 +181,10 @@ class LazyCommanderApp(App):
             with Vertical(id="bottom-row", classes="panel"):
                 yield Static("Output", classes="title")
                 yield Static("", id="output")
-        yield Static("↑↓ Navigate | Enter: Run | Ctrl+N: New | Ctrl+E: Edit | Ctrl+F: Search | Del: Delete | Ctrl+Q: Quit", id="footer")
+            yield Static("Up/Down: Navigate | Enter: Run | Ctrl+N: New | Ctrl+E: Edit | Ctrl+F: Search | Del: Delete | Ctrl+Q: Quit", id="footer")
 
     def on_mount(self) -> None:
-        self.title = "LazyCommander"
+        self.title = ""
         self.commands = self.store.load()
         self.refresh_command_list()
         self.update_output("Ready. Press Ctrl+N to add a command.")
